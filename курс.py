@@ -8,7 +8,7 @@ from tkcalendar import DateEntry
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
-# --- Константы ---
+# Константы 
 SHIFT_START_TIME = datetime.time(6, 0)
 SHIFT_END_TIME = datetime.time(3, 0)
 PEAK_HOURS_START_1 = datetime.time(7, 0)
@@ -28,16 +28,16 @@ ROUTE_TIME_MAX_MINUTES = 75
 PASSENGER_FLOW = 1000
 PEAK_PASSENGER_PERCENT = 0.7
 
-# --- Параметры генетического алгоритма ---
+#  Параметры генетического алгоритма 
 POPULATION_SIZE = 50
 GENERATIONS = 100
 MUTATION_RATE = 0.1
 
-# --- Дни недели ---
+# Дни недели 
 WEEKDAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
 WEEKEND = ["Saturday", "Sunday"]
 
-# --- Структуры данных ---
+#  Структуры данных 
 class Driver:
     def __init__(self, driver_type, id):
         self.type = driver_type
@@ -341,7 +341,7 @@ def write_schedule_to_csv(straight_schedule, genetic_schedule, filename, current
             shifts_text = shifts_text.rstrip(", ")
             writer.writerow([algorithm_name, driver.id, shifts_text])
 
-# --- Запись сравнения результатов в CSV-файл ---
+#  Запись сравнения результатов в CSV-файл 
 def write_comparison_to_csv(straight_metrics, genetic_metrics, filename):
     with open(filename, 'w', newline='') as csvfile:
         writer = csv.writer(csvfile)
@@ -390,7 +390,7 @@ def display_comparison_window(straight_schedule, genetic_schedule, straight_metr
     canvas_widget = canvas.get_tk_widget()
     canvas_widget.pack()
 
-# --- Отображение расписания в таблице ---
+#  Отображение расписания в таблице 
 def display_schedule(straight_schedule, genetic_schedule, table, current_date):
     for item in table.get_children():
         table.delete(item)
@@ -447,7 +447,7 @@ def display_schedule(straight_schedule, genetic_schedule, table, current_date):
          table.item(item,  tags=('oddrow',))
     table.tag_configure('oddrow', background='#f0f0f0')
 
-# --- Функция запуска алгоритмов и отображения результатов ---
+#  Функция запуска алгоритмов и отображения результатов 
 def run_algorithms_and_display():
     try:
         num_buses = int(buses_entry.get())
@@ -472,7 +472,7 @@ def run_algorithms_and_display():
         metrics_text.config(text=f"Ошибка: {e}")
 
 
-# --- Функция сохранения расписания в файл ---
+#  Функция сохранения расписания в файл 
 def save_schedule_to_file():
    filename = filedialog.asksaveasfilename(defaultextension=".csv", filetypes=[("CSV файлы", "*.csv")])
    if filename:
@@ -487,11 +487,11 @@ def save_schedule_to_file():
         print("Расписание сохранено в:", filename)
 
 
-# --- Создание основного окна ---
+#  Создание основного окна 
 root = tk.Tk()
 root.title("Генератор расписания автобусов")
 
-# --- Поля ввода ---
+#  Поля ввода 
 # Ввод количества автобусов
 buses_label = tk.Label(root, text="Количество автобусов:")
 buses_label.grid(row=0, column=0, padx=5, pady=5, sticky=tk.W)
@@ -523,11 +523,11 @@ date_entry = DateEntry(root, width=12, background='white',
                            )
 date_entry.grid(row=3, column=1, padx=5, pady=5, sticky=tk.W)
 
-# --- Кнопка запуска алгоритмов ---
+#  Кнопка запуска алгоритмов 
 run_button = tk.Button(root, text="Сгенерировать расписание", command=run_algorithms_and_display)
 run_button.grid(row=4, column=0, columnspan=2, padx=5, pady=10)
 
-# --- Таблица для отображения расписания ---
+#  Таблица для отображения расписания 
 schedule_table = ttk.Treeview(root, columns=("Algorithm", "Driver ID", "Schedule", "Work Time", "Break Time"), show="headings")
 schedule_table.grid(row=5, column=0, columnspan=2, padx=5, pady=5, sticky="nsew")
 
@@ -535,11 +535,11 @@ root.grid_rowconfigure(5, weight=1)
 root.grid_columnconfigure(0, weight=1)
 root.grid_columnconfigure(1, weight=1)
 
-# --- Текст для вывода метрик ---
+#Текст для вывода метрик 
 metrics_text = tk.Label(root, text="")
 metrics_text.grid(row=6, column=0, columnspan=2, padx=5, pady=5)
 
-# --- Кнопка сохранения расписания ---
+# Кнопка сохранения расписания
 save_button = tk.Button(root, text="Сохранить расписание", command=save_schedule_to_file)
 save_button.grid(row=7, column=0, columnspan=2, padx=5, pady=10)
 
